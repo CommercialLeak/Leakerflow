@@ -124,22 +124,7 @@ export default function GTA6Page() {
                 </div>
               )}
             </li>
-            <li>
-              <a 
-                href="#about" 
-                className="px-3 py-1.5 text-sm text-white/70 hover:text-white rounded-full hover:bg-white/10 transition-colors flex items-center"
-              >
-                About
-              </a>
-            </li>
-            <li>
-              <a 
-                href="#timeline" 
-                className="px-3 py-1.5 text-sm text-white/70 hover:text-white rounded-full hover:bg-white/10 transition-colors flex items-center"
-              >
-                Timeline
-              </a>
-            </li>
+            {/* Links removidos */}
           </ul>
         </div>
       </nav>
@@ -242,71 +227,7 @@ export default function GTA6Page() {
           <CharacterSection />
         </div>
         
-        {/* About Section */}
-        <section id="about" className="gta-section gta-card relative overflow-hidden">
-          <h2 className="gta-title">About Grand Theft Auto VI</h2>
-          <div className="h-0.5 w-16 bg-white/50 mb-6"></div>
-          <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-            Grand Theft Auto VI takes place in the state of Leonida, featuring the iconic Vice City and its surroundings. 
-            Following the story of Lucia and Jason, the game promises to deliver Rockstar's most immersive and detailed 
-            open world to date. With a focus on the criminal underworld of modern Vice City, players will navigate a 
-            complex narrative filled with heists, chaos, and the search for freedom in a world that constantly tries to 
-            hold them back.
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="p-4 bg-white/5 rounded-md backdrop-blur-sm border border-white/5">
-              <h3 className="font-medium mb-2">Release</h3>
-              <p className="text-muted-foreground">Fall 2025</p>
-            </div>
-            <div className="p-4 bg-white/5 rounded-md backdrop-blur-sm border border-white/5">
-              <h3 className="font-medium mb-2">Platforms</h3>
-              <p className="text-muted-foreground">PS5, Xbox Series X|S</p>
-            </div>
-            <div className="p-4 bg-white/5 rounded-md backdrop-blur-sm border border-white/5">
-              <h3 className="font-medium mb-2">Developer</h3>
-              <p className="text-muted-foreground">Rockstar Games</p>
-            </div>
-            <div className="p-4 bg-white/5 rounded-md backdrop-blur-sm border border-white/5">
-              <h3 className="font-medium mb-2">Setting</h3>
-              <p className="text-muted-foreground">Leonida, Vice City</p>
-            </div>
-          </div>
-          
-          {/* Elemento decorativo - Gradiente na parte inferior */}
-          <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-primary/80 to-transparent"></div>
-        </section>
-        
-        {/* Timeline */}
-        <section id="timeline" className="gta-section gta-card relative">
-          <h2 className="gta-title">Development Timeline</h2>
-          <div className="h-0.5 w-16 bg-white/50 mb-6"></div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div className="border-l-2 border-primary/60 pl-4 relative">
-              <div className="w-3 h-3 rounded-full bg-primary absolute -left-[6.5px] top-0"></div>
-              <h4 className="font-medium">February 2022</h4>
-              <p className="text-sm text-muted-foreground">Rockstar confirms GTA VI is "well underway"</p>
-            </div>
-            <div className="border-l-2 border-primary/60 pl-4 relative">
-              <div className="w-3 h-3 rounded-full bg-primary absolute -left-[6.5px] top-0"></div>
-              <h4 className="font-medium">September 2022</h4>
-              <p className="text-sm text-muted-foreground">Development footage leaks online</p>
-            </div>
-            <div className="border-l-2 border-primary/60 pl-4 relative">
-              <div className="w-3 h-3 rounded-full bg-primary absolute -left-[6.5px] top-0"></div>
-              <h4 className="font-medium">December 2023</h4>
-              <p className="text-sm text-muted-foreground">First official trailer released</p>
-            </div>
-            <div className="border-l-2 border-primary/60 pl-4 relative">
-              <div className="w-3 h-3 rounded-full bg-primary absolute -left-[6.5px] top-0"></div>
-              <h4 className="font-medium">Fall 2025</h4>
-              <p className="text-sm text-muted-foreground">Expected release</p>
-            </div>
-          </div>
-          
-          {/* Elemento decorativo */}
-          <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-primary/80 to-transparent"></div>
-        </section>
+        {/* Seções About e Timeline removidas conforme solicitado */}
       </div>
 
       {/* Footer */}
