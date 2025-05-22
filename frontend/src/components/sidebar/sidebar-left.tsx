@@ -125,9 +125,6 @@ export function SidebarLeft({
           </div>
         </div>
       </SidebarHeader>
-      <SidebarContent className="[&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
-        <NavAgents />
-      </SidebarContent>
       {/* GTA 6 Button */}
       <div className="px-3 py-2">
         <Link href="/gta6">
@@ -136,6 +133,9 @@ export function SidebarLeft({
           </button>
         </Link>
       </div>
+      <SidebarContent className="[&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+        <NavAgents />
+      </SidebarContent>
       {state !== 'collapsed' && (
         <div className="px-3 py-2">
           <CTACard />
