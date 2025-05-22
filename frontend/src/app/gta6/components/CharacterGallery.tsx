@@ -60,8 +60,8 @@ export default function CharacterGallery({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Main image display with improved styling */}
-      <div className="relative aspect-[4/5] overflow-hidden rounded-lg shadow-xl border border-white/10 bg-black/30">
+      {/* Main image display com altura fixa para consistência */}
+      <div className="relative aspect-[3/4] overflow-hidden rounded-lg shadow-lg border border-white/10 bg-black/20">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeImageIndex}
@@ -83,47 +83,47 @@ export default function CharacterGallery({
           </motion.div>
         </AnimatePresence>
         
-        {/* Fullscreen button */}
+        {/* Botão de expandir menor e menos intrusivo */}
         <button
           onClick={() => setShowFullGallery(true)}
-          className="absolute top-3 right-3 w-9 h-9 rounded-full bg-black/60 backdrop-blur-sm hover:bg-black/80 flex items-center justify-center text-white transition-colors border border-white/20"
+          className="absolute top-2 right-2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center text-white/80 hover:text-white transition-all border border-white/10"
           aria-label="View fullscreen"
         >
-          <Expand size={16} />
+          <Expand size={14} />
         </button>
         
-        {/* Navigation controls with improved styling */}
-        <div className="absolute inset-x-0 bottom-0 flex justify-between p-3 z-10">
+        {/* Controles de navegação mais compactos */}
+        <div className="absolute inset-x-0 bottom-2 flex justify-between px-2 z-10">
           <button 
             onClick={() => handleImageChange('prev')}
-            className="w-9 h-9 rounded-full bg-black/60 backdrop-blur-sm hover:bg-black/80 flex items-center justify-center text-white transition-colors border border-white/20"
+            className="w-8 h-8 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center text-white/80 hover:text-white transition-all border border-white/10"
             aria-label="Previous image"
           >
-            <ChevronLeft size={18} />
+            <ChevronLeft size={16} />
           </button>
-          <div className="text-xs bg-black/60 backdrop-blur-sm text-white px-3 py-1.5 rounded-full">
+          <div className="text-xs bg-black/50 text-white/90 px-2 py-1 rounded-full text-[10px]">
             {activeImageIndex + 1}/{allImages.length}
           </div>
           <button 
             onClick={() => handleImageChange('next')}
-            className="w-9 h-9 rounded-full bg-black/60 backdrop-blur-sm hover:bg-black/80 flex items-center justify-center text-white transition-colors border border-white/20"
+            className="w-8 h-8 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center text-white/80 hover:text-white transition-all border border-white/10"
             aria-label="Next image"
           >
-            <ChevronRight size={18} />
+            <ChevronRight size={16} />
           </button>
         </div>
       </div>
       
-      {/* Thumbnail gallery */}
-      <div className="mt-4 grid grid-cols-4 gap-2">
+      {/* Miniaturas mais compactas e responsivas */}
+      <div className="mt-2 grid grid-cols-4 gap-1">
         {allImages.slice(0, 4).map((img, index) => (
           <button
             key={index}
             onClick={() => setActiveImageIndex(index)}
-            className={`relative aspect-square rounded-md overflow-hidden transition transform hover:scale-105 ${
+            className={`relative aspect-square rounded overflow-hidden transition transform ${
               activeImageIndex === index 
-                ? 'ring-2 ring-primary shadow-lg scale-105' 
-                : 'opacity-80 hover:opacity-100'
+                ? 'ring-1 ring-primary/70 shadow-md scale-[1.02]' 
+                : 'opacity-70 hover:opacity-100'
             }`}
           >
             <SafeImage 
@@ -138,23 +138,20 @@ export default function CharacterGallery({
         ))}
       </div>
       
-      {/* Fullscreen gallery modal */}
+      {/* Modal de galeria em tela cheia */}
       {showFullGallery && (
         <div 
           className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center"
           onClick={() => setShowFullGallery(false)}
         >
-          <div className="absolute top-4 right-4 p-4">
-            <button 
-              onClick={() => setShowFullGallery(false)}
-              className="text-white text-xl"
-              aria-label="Close gallery"
-            >
-              ✕
-            </button>
-          </div>
+          <button 
+            className="absolute top-4 right-4 p-2 text-white/70 hover:text-white text-sm bg-black/30 hover:bg-black/50 rounded-full w-8 h-8 flex items-center justify-center"
+            aria-label="Close gallery"
+          >
+            ✕
+          </button>
           
-          <div className="relative w-full max-w-4xl h-[80vh] px-10" onClick={(e) => e.stopPropagation()}>
+          <div className="relative w-full max-w-3xl h-[70vh] px-10" onClick={(e) => e.stopPropagation()}>
             <SafeImage 
               src={`${folderPath}/${allImages[activeImageIndex]}`}
               alt={`${name} - Image ${activeImageIndex + 1}`}
@@ -166,21 +163,21 @@ export default function CharacterGallery({
             
             <button 
               onClick={() => handleImageChange('prev')}
-              className="absolute left-0 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/40 hover:bg-black/60 flex items-center justify-center text-white"
+              className="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/30 hover:bg-black/50 flex items-center justify-center text-white/80 hover:text-white"
               aria-label="Previous image"
             >
-              <ChevronLeft size={24} />
+              <ChevronLeft size={20} />
             </button>
             
             <button 
               onClick={() => handleImageChange('next')}
-              className="absolute right-0 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/40 hover:bg-black/60 flex items-center justify-center text-white"
+              className="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/30 hover:bg-black/50 flex items-center justify-center text-white/80 hover:text-white"
               aria-label="Next image"
             >
-              <ChevronRight size={24} />
+              <ChevronRight size={20} />
             </button>
             
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white bg-black/60 px-4 py-2 rounded-full">
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/90 bg-black/40 px-3 py-1 rounded-full text-sm">
               {activeImageIndex + 1} / {allImages.length}
             </div>
           </div>

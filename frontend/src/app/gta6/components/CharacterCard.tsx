@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import CharacterHero from './CharacterHero';
 import CharacterGallery from './CharacterGallery';
@@ -26,19 +26,12 @@ export default function CharacterCard({
   info, 
   isPrimary = false 
 }: CharacterCardProps) {
-  
-  // Debug logs para verificar os caminhos de imagens
-  useEffect(() => {
-    console.log(`CharacterCard ${characterId} - BG Image Path:`, bgImagePath);
-    console.log(`CharacterCard ${characterId} - FG Image Path:`, fgImagePath);
-  }, [characterId, bgImagePath, fgImagePath]);
-  
   return (
     <motion.section 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
-      className="relative w-full mb-32"
+      className="relative w-full mb-16 shadow-lg"
       id={`character-${characterId}`}
     >
       {/* Character Hero Banner */}
@@ -49,9 +42,9 @@ export default function CharacterCard({
       />
 
       {/* Character Detail Content */}
-      <div className="w-full bg-black/70 backdrop-blur-md rounded-b-xl border-x border-b border-white/10 shadow-2xl">
-        <div className="container mx-auto max-w-screen-xl py-12 px-4 md:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
+      <div className="w-full bg-black/80 backdrop-blur-md rounded-b-xl border-x border-b border-white/10 shadow-lg">
+        <div className="container mx-auto py-8 px-4 md:px-6">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
             {/* Image Gallery */}
             <CharacterGallery 
               characterId={characterId} 

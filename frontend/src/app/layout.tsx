@@ -9,6 +9,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import Script from 'next/script';
+import { StagewiseToolbar } from '@/components/ui/stagewise-toolbar';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -149,6 +150,7 @@ export default function RootLayout({
           <Providers>
             {children}
             <Toaster />
+            <StagewiseToolbar />
           </Providers>
           <Analytics />
           <GoogleAnalytics gaId="G-6ETJFB3PT3" />

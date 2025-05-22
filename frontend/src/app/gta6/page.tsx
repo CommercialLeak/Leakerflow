@@ -47,15 +47,6 @@ export default function GTA6Page() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      {/* Breadcrumbs */}
-      <div className="flex items-center text-sm text-white/60 mb-6 gap-2">
-        <a href="/" className="hover:text-white flex items-center gap-1">
-          <Home size={14} />
-          <span>Home</span>
-        </a>
-        <ChevronRight size={14} />
-        <span className="text-white">Grand Theft Auto VI</span>
-      </div>
 
       {/* Fixed Navigation Menu */}
       <nav className="fixed top-4 right-4 z-50 flex flex-col space-y-2">
@@ -174,7 +165,7 @@ export default function GTA6Page() {
       <section id="hero" className="relative h-[85vh] w-full overflow-hidden rounded-xl mb-16 border border-white/10 shadow-2xl">
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/40 z-10"></div>
         <SafeImage 
-          src="/gta6/Hero_BG_Boobie_Ike(1).jpeg" 
+          src="/gta6/jason_and_lucia.jpeg" 
           alt="Grand Theft Auto VI" 
           fill 
           sizes="100vw"
