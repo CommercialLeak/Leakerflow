@@ -1,7 +1,8 @@
 "use client";
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Quote, Sparkles, Crown } from 'lucide-react';
 import SafeImage from './SafeImage';
 import { CharacterInfo } from '../data/characterData';
 
@@ -12,99 +13,272 @@ interface CharacterHeroProps {
 }
 
 export default function CharacterHero({ bgImagePath, fgImagePath, info }: CharacterHeroProps) {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [showQuote, setShowQuote] = useState(false);
   const officialDesc = info.officialDescription || [];
+  
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+      setTimeout(() => setShowQuote(true), 800);
+    }, 300);
+    return () => clearTimeout(timer);
+  }, []);
   
   // Get character quotes (usually the 3rd or 4th paragraph if available)
   const getCharacterQuote = () => {
-    if (officialDesc.length >= 4 && officialDesc[3].startsWith('"') || officialDesc[3]?.length < 60) {
+    if (officialDesc.length >= 4 && (officialDesc[3].startsWith('"') || officialDesc[3]?.length < 60)) {
       return officialDesc[3];
-    } else if (officialDesc.length >= 3 && officialDesc[2].startsWith('"') || officialDesc[2]?.length < 60) {
+    } else if (officialDesc.length >= 3 && (officialDesc[2].startsWith('"') || officialDesc[2]?.length < 60)) {
       return officialDesc[2];
     }
-    // Default to empty if no suitable quote found
     return '';
   };
 
   const quote = getCharacterQuote();
+  const isPrimary = info.name === 'Lucia' || info.name === 'Jason';
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const imageVariants = {
+    hidden: { opacity: 0, scale: 1.1 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 1.2,
+        ease: "easeOut"
+      }
+    }
+  };
 
   return (
-    <div className="character-hero relative h-[45vh] md:h-[55vh] lg:h-[60vh] rounded-t-xl overflow-hidden">
-      {/* Background Overlay - Darker gradient for better text readability */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/40 z-10"></div>
-      
-      {/* Background Image */}
+    <motion.div 
+      className="character-hero relative h-[50vh] md:h-[60vh] lg:h-[65vh] rounded-t-2xl overflow-hidden group"
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+    >
+      {/* Animated background particles */}
       <div className="absolute inset-0 z-5">
+        {[...Array(6)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-white/20 rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [-20, -40, -20],
+              opacity: [0.2, 0.8, 0.2],
+              scale: [1, 1.5, 1],
+            }}
+            transition={{
+              duration: 3 + Math.random() * 2,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+            }}
+          />
+        ))}
+      </div>
+      
+      {/* Enhanced background overlay with dynamic gradients */}
+      <motion.div 
+        className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/30 z-10"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      />
+      <motion.div 
+        className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/40 z-15"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 0.3 }}
+      />
+      
+      {/* Background Image with enhanced animations */}
+      <motion.div 
+        className="absolute inset-0 z-5"
+        variants={imageVariants}
+      >
         <SafeImage 
           src={bgImagePath} 
           alt={`${info.name} background`} 
           fill 
           sizes="100vw"
-          className="object-cover"
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
           priority={true}
           encodeSrc={false}
+          onLoad={() => setIsLoaded(true)}
         />
-      </div>
+      </motion.div>
       
-      {/* Foreground Character Image - Melhor posicionamento e tamanho */}
+      {/* Foreground Character Image with enhanced positioning and effects */}
       {fgImagePath && (
-        <div className="absolute bottom-0 right-0 h-full w-full md:w-1/2 lg:w-2/5 z-20 overflow-hidden">
+        <motion.div 
+          className="absolute bottom-0 right-0 h-full w-full md:w-1/2 lg:w-2/5 z-20 overflow-hidden"
+          initial={{ opacity: 0, x: 50, scale: 0.9 }}
+          animate={{ opacity: 1, x: 0, scale: 1 }}
+          transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
+        >
           <div className="absolute bottom-0 right-0 w-full h-full">
             <SafeImage 
               src={fgImagePath} 
               alt={`${info.name} portrait`} 
               fill 
               sizes="50vw"
-              className="object-contain object-bottom"
+              className="object-contain object-bottom transition-transform duration-500 group-hover:scale-105"
               priority={true}
               encodeSrc={false}
             />
+            
+            {/* Character glow effect */}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-transparent"
+              animate={{
+                opacity: [0.3, 0.6, 0.3],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
           </div>
-        </div>
+        </motion.div>
       )}
       
-      {/* Character Info Overlay - More compact and better organized */}
-      <div className="absolute inset-0 flex flex-col justify-end p-5 sm:p-6 md:p-8 z-30">
-        <div className="max-w-xl">
-          {/* Character Name - Tamanho mais apropriado */}
+      {/* Character Info Overlay with enhanced animations */}
+      <motion.div 
+        className="absolute inset-0 flex flex-col justify-end p-6 sm:p-8 md:p-10 z-30"
+        variants={containerVariants}
+      >
+        <div className="max-w-2xl">
+          {/* Primary character indicator */}
+          {isPrimary && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0, rotate: -45 }}
+              animate={{ opacity: 1, scale: 1, rotate: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              className="flex items-center gap-2 mb-4"
+            >
+              <Crown size={20} className="text-primary" />
+              <span className="text-primary font-semibold text-sm tracking-wide uppercase">Protagonista Principal</span>
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+              >
+                <Sparkles size={16} className="text-primary" />
+              </motion.div>
+            </motion.div>
+          )}
+          
+          {/* Character Name with enhanced styling */}
           <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="mb-2"
+            variants={itemVariants}
+            className="mb-4"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight drop-shadow-md">
+            <motion.h2 
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight drop-shadow-2xl"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.2 }}
+            >
               {info.name}
-            </h2>
+            </motion.h2>
             
-            {/* Sleek underline element */}
-            <div className="h-1 w-12 bg-white/80 mt-2 mb-3"></div>
+            {/* Enhanced underline with animation */}
+            <motion.div 
+              className="h-1 bg-gradient-to-r from-primary via-white to-primary mt-3 mb-4 rounded-full"
+              initial={{ width: 0 }}
+              animate={{ width: "4rem" }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            />
           </motion.div>
 
-          {/* Character Tagline - First line of description - Tamanho mais apropriado */}
+          {/* Character Tagline with enhanced styling */}
           {officialDesc.length > 0 && (
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.3 }}
-              className="text-sm sm:text-base text-white/90 mb-2 font-medium tracking-tight"
+              variants={itemVariants}
+              className="text-base sm:text-lg md:text-xl text-white/95 mb-4 font-medium tracking-wide leading-relaxed max-w-lg"
             >
               {officialDesc[0]}
             </motion.p>
           )}
           
-          {/* Character Quote - Shown as a prominent element if available - Tamanho mais apropriado */}
-          {quote && (
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.4 }}
-              className="text-xs sm:text-sm text-white/80 mb-3 font-medium italic tracking-tight"
-            >
-              {quote.startsWith('"') ? quote : `"${quote}"`}
-            </motion.p>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-} 
+          {/* Character Quote with enhanced presentation */}
+           <AnimatePresence>
+             {quote && showQuote && (
+               <motion.div
+                 initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                 animate={{ opacity: 1, y: 0, scale: 1 }}
+                 exit={{ opacity: 0, y: -20, scale: 0.95 }}
+                 transition={{ duration: 0.6 }}
+                 className="relative pl-6 pr-4 py-3 bg-black/30 backdrop-blur-sm rounded-lg border border-white/10"
+               >
+                 <Quote className="absolute left-2 top-3 text-primary/60 h-4 w-4" />
+                 <p className="text-sm sm:text-base text-white/90 font-medium italic leading-relaxed">
+                   {quote.startsWith('"') ? quote : `"${quote}"`}
+                 </p>
+                 
+                 {/* Quote accent line */}
+                 <motion.div
+                   className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-primary to-transparent"
+                   initial={{ width: 0 }}
+                   animate={{ width: "100%" }}
+                   transition={{ duration: 0.8, delay: 0.3 }}
+                 />
+               </motion.div>
+             )}
+           </AnimatePresence>
+           
+           {/* Decorative elements */}
+           <motion.div
+             className="flex items-center gap-2 mt-6 opacity-60"
+             initial={{ opacity: 0 }}
+             animate={{ opacity: 0.6 }}
+             transition={{ duration: 0.8, delay: 1 }}
+           >
+             {[...Array(3)].map((_, i) => (
+               <motion.div
+                 key={i}
+                 className="w-1 h-1 bg-white rounded-full"
+                 animate={{
+                   scale: [1, 1.5, 1],
+                   opacity: [0.6, 1, 0.6],
+                 }}
+                 transition={{
+                   duration: 2,
+                   repeat: Infinity,
+                   delay: i * 0.3,
+                 }}
+               />
+             ))}
+           </motion.div>
+         </div>
+       </motion.div>
+     </motion.div>
+   );
+ }
