@@ -31,7 +31,7 @@ export default function CharacterCard({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
-      className="relative w-full mb-16 shadow-lg"
+      className="relative w-full mb-10 shadow-md"
       id={`character-${characterId}`}
     >
       {/* Character Hero Banner */}
@@ -42,8 +42,8 @@ export default function CharacterCard({
       />
 
       {/* Character Detail Content */}
-      <div className="w-full bg-black/80 backdrop-blur-md rounded-b-xl border-x border-b border-white/10 shadow-lg">
-        <div className="container mx-auto py-8 px-4 md:px-6">
+      <div className="w-full bg-black/80 backdrop-blur-md rounded-b-xl border-x border-b border-white/10 shadow-md">
+        <div className="container mx-auto py-6 px-4 md:px-6">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
             {/* Image Gallery */}
             <CharacterGallery 

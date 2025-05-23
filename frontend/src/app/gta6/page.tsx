@@ -46,7 +46,7 @@ export default function GTA6Page() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-6 max-w-[1400px]">
 
       {/* Fixed Navigation Menu */}
       <nav className="fixed top-4 right-4 z-50 flex flex-col space-y-2">
@@ -147,7 +147,7 @@ export default function GTA6Page() {
       )}
 
       {/* Hero Section */}
-      <section id="hero" className="relative h-[85vh] w-full overflow-hidden rounded-xl mb-16 border border-white/10 shadow-2xl">
+      <section id="hero" className="relative h-[65vh] w-full overflow-hidden rounded-xl mb-12 border border-white/10 shadow-xl">
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/40 z-10"></div>
         <SafeImage 
           src="/gta6/jason_and_lucia.jpeg" 
@@ -162,18 +162,18 @@ export default function GTA6Page() {
           <Image 
             src="/gta6/vi.png" 
             alt="GTA VI Logo" 
-            width={400} 
-            height={240} 
-            className="mb-8 h-auto" 
+            width={300} 
+            height={180} 
+            className="mb-6 h-auto" 
             priority
           />
         </div>
         <div className="absolute bottom-0 left-0 right-0 z-20 p-8 md:p-12">
           <div className="container mx-auto max-w-screen-xl">
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tighter">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 tracking-tighter">
               Grand Theft Auto VI
             </h1>
-            <div className="h-1 w-24 bg-white/80 mt-1 mb-6"></div>
+            <div className="h-1 w-20 bg-white/80 mt-1 mb-4"></div>
             <div className="flex flex-wrap items-center gap-6 text-white/90">
               <span className="flex items-center gap-2 bg-black/30 backdrop-blur-sm px-4 py-2 rounded-full">
                 <Calendar size={20} className="text-primary" />
@@ -188,8 +188,18 @@ export default function GTA6Page() {
         </div>
       </section>
 
-      {/* Trailers Section - Nova seção de trailers */}
-      <section id="trailers" className="gta-section w-full max-w-screen-xl mx-auto mb-16">
+      {/* Section Divider */}
+      <div className="w-full max-w-[1200px] mx-auto my-6">
+        <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+      </div>
+
+      {/* Trailers Section */}
+      <section id="trailers" className="gta-section w-full max-w-[1200px] mx-auto mb-10">
+        <div className="flex items-center gap-4 mb-6">
+          <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent flex-grow"></div>
+          <h2 className="text-2xl font-bold text-white">Trailers</h2>
+          <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent flex-grow"></div>
+        </div>
         <div className="gta-card">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Trailer 1 - Embedded YouTube player */}
@@ -220,10 +230,20 @@ export default function GTA6Page() {
         </div>
       </section>
 
+      {/* Section Divider */}
+      <div className="w-full max-w-[1200px] mx-auto my-6">
+        <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+      </div>
+
       {/* Main Content */}
-      <div className="w-full max-w-screen-xl mx-auto">
+      <div className="w-full max-w-[1200px] mx-auto">
         {/* Characters Section */}
         <div id="characters" className="gta-section">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent flex-grow"></div>
+            <h2 className="text-2xl font-bold text-white">Characters</h2>
+            <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent flex-grow"></div>
+          </div>
           <CharacterSection />
         </div>
         
@@ -231,7 +251,7 @@ export default function GTA6Page() {
       </div>
 
       {/* Footer */}
-      <footer className="mt-24 py-6 text-center text-sm text-muted-foreground border-t border-white/10">
+      <footer className="mt-16 py-4 text-center text-sm text-muted-foreground border-t border-white/10">
         <p>This is an unofficial fan page for Grand Theft Auto VI. All images and information are property of Rockstar Games.</p>
       </footer>
     </div>

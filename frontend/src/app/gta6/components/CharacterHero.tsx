@@ -28,7 +28,7 @@ export default function CharacterHero({ bgImagePath, fgImagePath, info }: Charac
   const quote = getCharacterQuote();
 
   return (
-    <div className="character-hero relative h-[60vh] md:h-[70vh] lg:h-[80vh] rounded-t-xl overflow-hidden">
+    <div className="character-hero relative h-[45vh] md:h-[55vh] lg:h-[60vh] rounded-t-xl overflow-hidden">
       {/* Background Overlay - Darker gradient for better text readability */}
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/40 z-10"></div>
       
@@ -62,8 +62,8 @@ export default function CharacterHero({ bgImagePath, fgImagePath, info }: Charac
         </div>
       )}
       
-      {/* Character Info Overlay - Melhor organização e tamanho de texto */}
-      <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-8 md:p-10 z-30">
+      {/* Character Info Overlay - More compact and better organized */}
+      <div className="absolute inset-0 flex flex-col justify-end p-5 sm:p-6 md:p-8 z-30">
         <div className="max-w-xl">
           {/* Character Name - Tamanho mais apropriado */}
           <motion.div 
@@ -72,12 +72,12 @@ export default function CharacterHero({ bgImagePath, fgImagePath, info }: Charac
             transition={{ duration: 0.7, delay: 0.2 }}
             className="mb-2"
           >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight drop-shadow-md">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight drop-shadow-md">
               {info.name}
             </h2>
             
             {/* Sleek underline element */}
-            <div className="h-1 w-16 bg-white/80 mt-2 mb-4"></div>
+            <div className="h-1 w-12 bg-white/80 mt-2 mb-3"></div>
           </motion.div>
 
           {/* Character Tagline - First line of description - Tamanho mais apropriado */}
@@ -86,7 +86,7 @@ export default function CharacterHero({ bgImagePath, fgImagePath, info }: Charac
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.3 }}
-              className="text-base sm:text-lg text-white/90 mb-2 font-medium tracking-tight"
+              className="text-sm sm:text-base text-white/90 mb-2 font-medium tracking-tight"
             >
               {officialDesc[0]}
             </motion.p>
@@ -98,7 +98,7 @@ export default function CharacterHero({ bgImagePath, fgImagePath, info }: Charac
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.4 }}
-              className="text-sm sm:text-base text-white/80 mb-4 font-medium italic tracking-tight"
+              className="text-xs sm:text-sm text-white/80 mb-3 font-medium italic tracking-tight"
             >
               {quote.startsWith('"') ? quote : `"${quote}"`}
             </motion.p>
